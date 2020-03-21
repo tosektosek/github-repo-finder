@@ -1,0 +1,14 @@
+div {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 16px;
+  text-align: center;
+  font-weight: bold;
+
+  &.error {
+    background: red;
+    color: white;
+  }
+}

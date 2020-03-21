@@ -11,6 +11,11 @@ export const getRepositoriesForUserWithoutForksSuccess = createAction(
   props<{ repositories: Repository[] }>(),
 );
 
+export const getRepositoriesForUserWithoutForksFailue = createAction(
+  '[Repositories] get repositories for user failure',
+  props<{ message: string }>(),
+);
+
 export const getBranchesForRepository = createAction(
   '[Repositories] get brancher for repositories ',
   props<{ repoName: string }>(),
@@ -19,4 +24,9 @@ export const getBranchesForRepository = createAction(
 export const getBranchesForRepositorySuccess = createAction(
   '[Repositories] get brancher for repositories success',
   props<{ repoName: string; branches: Branch[] }>(),
+);
+
+export const getBranchesForRepositoryFailure = createAction(
+  '[Repositories] get brancher for repositories failure',
+  props<{ message: string }>(),
 );

@@ -5,6 +5,8 @@ import {
   getRepositoriesForUserWithoutForksSuccess,
   getBranchesForRepositorySuccess,
   getBranchesForRepository,
+  getRepositoriesForUserWithoutForksFailue,
+  getBranchesForRepositoryFailure,
 } from '../actions/repositories.actions';
 import {
   mergeMap,
@@ -23,6 +25,7 @@ import { EMPTY } from 'rxjs';
 import { Repository } from '../../model/repository.model';
 import { SharedState } from '../reducers';
 import { Store } from '@ngrx/store';
+import { displayMessage } from '../actions/notifications.actions';
 
 @Injectable()
 export class RepositoriesEffects {
@@ -49,7 +52,14 @@ export class RepositoriesEffects {
             getRepositoriesForUserWithoutForksSuccess({ repositories }),
           ),
 
-          catchError(() => EMPTY),
+          catchError(() => {
+            this.store.dispatch(
+              getRepositoriesForUserWithoutForksFailue({
+                message: 'Error while fetching repos',
+              }),
+            );
+            return EMPTY;
+          }),
         ),
       ),
     ),
@@ -61,9 +71,19 @@ export class RepositoriesEffects {
       mergeMap(request =>
         this.githubService.getRepoDetails(request.repoName).pipe(
           map(details =>
-            getBranchesForRepositorySuccess({ repoName: request.repoName, branches: details }),
+            getBranchesForRepositorySuccess({
+              repoName: request.repoName,
+              branches: details,
+            }),
           ),
-          catchError(() => EMPTY),
+          catchError(() => {
+            this.store.dispatch(
+              getBranchesForRepositoryFailure({
+                message: 'Error while fetching branches',
+              }),
+            );
+            return EMPTY;
+          }),
         ),
       ),
     ),

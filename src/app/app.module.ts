@@ -13,6 +13,9 @@ import { RepositoryListItemComponent } from './repository-list/repository-list-i
 import { RepositoryListComponent } from './repository-list/repository-list.component';
 import { RepositoriesEffects } from './shared/store/effects/repositories.effects';
 import { reducers } from './shared/store/reducers';
+import { NotificationsEffects } from './shared/store/effects/notifications.effects';
+import { SharedModule } from './shared/shared.module';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 export const FEATURE_REDUCER = new InjectionToken<any>('Root Reducer', {
   factory: () => reducers,
@@ -23,8 +26,10 @@ export const FEATURE_REDUCER = new InjectionToken<any>('Root Reducer', {
     RepositoryListComponent,
     RepositoryListItemComponent,
     RepositoryFinderComponent,
+    NotificationsComponent,
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -43,7 +48,7 @@ export const FEATURE_REDUCER = new InjectionToken<any>('Root Reducer', {
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([RepositoriesEffects]),
+    EffectsModule.forRoot([RepositoriesEffects, NotificationsEffects]),
     StoreModule.forFeature('shared', FEATURE_REDUCER),
   ],
   providers: [],
