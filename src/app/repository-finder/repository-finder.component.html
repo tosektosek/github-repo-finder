@@ -1,0 +1,22 @@
+<form [formGroup]="repositoriesForm" (submit)="findRepos()">
+  <label>Enter username</label>
+  <input formControlName="username" type="text" />
+  <button [disabled]="username.invalid" type="submit">Submit</button>
+  <em *ngIf="username.dirty && username.hasError('required')"
+    >Field cannot be empty</em
+  >
+</form>
+
+<ul>
+  <li *ngFor="let repo of repositories$ | async">
+    <p>Repo name: {{ repo.name }}</p>
+    <p>Owner: {{ repo.owner.login }}</p>
+    <p>Branches</p>
+    <ul>
+      <li *ngFor="let branch of repo.branches">
+        <p>Name: {{ branch.name }}</p>
+        <p>last commit:{{ branch.commit.sha }}</p>
+      </li>
+    </ul>
+  </li>
+</ul>
