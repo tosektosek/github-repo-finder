@@ -1,3 +1,7 @@
-<p>
-  repository-list works!
-</p>
+<div class="list">
+  <app-repository-list-item
+    class="list__item"
+    *ngFor="let repo of repositories$ | async"
+    [repository]="repo"
+  ></app-repository-list-item>
+</div>

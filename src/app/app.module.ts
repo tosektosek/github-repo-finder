@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InjectionToken, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +16,7 @@ import { reducers } from './shared/store/reducers';
 import { NotificationsEffects } from './shared/store/effects/notifications.effects';
 import { SharedModule } from './shared/shared.module';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { TokenInterceptor } from './shared/interceptors/token-interceptor';
 
 export const FEATURE_REDUCER = new InjectionToken<any>('Root Reducer', {
   factory: () => reducers,
@@ -32,8 +33,6 @@ export const FEATURE_REDUCER = new InjectionToken<any>('Root Reducer', {
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     StoreModule.forRoot(
       {},
       {
@@ -51,7 +50,9 @@ export const FEATURE_REDUCER = new InjectionToken<any>('Root Reducer', {
     EffectsModule.forRoot([RepositoriesEffects, NotificationsEffects]),
     StoreModule.forFeature('shared', FEATURE_REDUCER),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

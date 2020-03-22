@@ -1,9 +1,4 @@
-import { Repository } from '../../model/repository.model';
 import { createReducer, on } from '@ngrx/store';
-import {
-  getRepositoriesForUserWithoutForksSuccess,
-  getBranchesForRepositorySuccess,
-} from '../actions/repositories.actions';
 import { Notification } from '../../model/notification.model';
 import {
   displayMessage,

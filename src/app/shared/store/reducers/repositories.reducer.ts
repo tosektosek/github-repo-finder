@@ -1,8 +1,9 @@
-import { Repository } from '../../model/repository.model';
 import { createReducer, on } from '@ngrx/store';
+import { Repository } from '../../model/repository.model';
 import {
-  getRepositoriesForUserWithoutForksSuccess,
   getBranchesForRepositorySuccess,
+  getRepositoriesForUserWithoutForksFailue,
+  getRepositoriesForUserWithoutForksSuccess,
 } from '../actions/repositories.actions';
 
 export interface RepositoriesState {
@@ -25,5 +26,8 @@ export const repositoryReducer = createReducer(
     );
 
     return { ...state, repositories: updatedRepositories };
+  }),
+  on(getRepositoriesForUserWithoutForksFailue, () => {
+    return { repositories: [] };
   }),
 );

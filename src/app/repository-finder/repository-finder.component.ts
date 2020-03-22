@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { getRepositoriesForUserWithoutForks } from '../shared/store/actions/repositories.actions';
 import { SharedState } from '../shared/store/reducers';
-import { getRepositories } from '../shared/store/selectors/repositories.selectors';
 
 @Component({
   selector: 'app-repository-finder',
   templateUrl: './repository-finder.component.html',
   styleUrls: ['./repository-finder.component.scss'],
 })
-export class RepositoryFinderComponent implements OnInit {
-  repositories$ = this.store.select(getRepositories);
+export class RepositoryFinderComponent {
   repositoriesForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
   });
@@ -22,9 +20,9 @@ export class RepositoryFinderComponent implements OnInit {
 
   constructor(private store: Store<SharedState>) {}
 
-  ngOnInit() {}
-
   findRepos() {
-    this.store.dispatch(getRepositoriesForUserWithoutForks({ username: this.username.value }));
+    this.store.dispatch(
+      getRepositoriesForUserWithoutForks({ username: this.username.value }),
+    );
   }
 }

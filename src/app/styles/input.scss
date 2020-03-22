@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  /* margin-bottom: 24px; */
+  align-items: baseline;
+  justify-content: center;
+
+  &__button {
+    cursor: pointer;
+    background: $secondary;
+    border: 1px solid $primary;
+    padding: 8px;
+    transition: 0.2s;
+
+    &:hover {
+      background: $primary;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__input {
+    border: 1px solid $primary;
+    padding: 8px;
+    border-right: 0;
+  }
+
+  &__label {
+    margin-right: 4px;
+  }
+}

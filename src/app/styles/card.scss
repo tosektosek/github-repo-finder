@@ -1,0 +1,29 @@
+.card {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.23);
+  &__header {
+    border-bottom: 1px solid $primary;
+    background: $secondary;
+    h1 {
+      font-size: 120%;
+    }
+  }
+
+  &__content {
+    p {
+      word-wrap: break-word;
+    }
+
+    &__branches:not(:last-of-type) {
+      border-bottom: 1px solid $secondary;
+    }
+  }
+
+  &__header,
+  &__content {
+    padding: 16px;
+  }
+
+  h5 {
+    margin: 0;
+  }
+}

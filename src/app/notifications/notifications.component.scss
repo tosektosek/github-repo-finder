@@ -1,3 +1,4 @@
+@import '../../styles.scss';
 div {
   position: absolute;
   bottom: 0;
@@ -8,7 +9,7 @@ div {
   font-weight: bold;
 
   &.error {
-    background: red;
+    background: $error;
     color: white;
   }
 }

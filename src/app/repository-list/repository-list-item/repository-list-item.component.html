@@ -1,3 +1,13 @@
-<p>
-  repository-list-item works!
-</p>
+<div class="card">
+  <div class="card__header">
+    <h1>{{ repository.name }}</h1>
+    <h5>{{ repository.owner.login }}</h5>
+  </div>
+  <div class="card__content">
+    <h5>Branches</h5>
+    <div class="card__content__branches" *ngFor="let branch of repository.branches">
+      <p>Name: {{ branch.name }}</p>
+      <p>last commit: {{ branch.commit.sha }}</p>
+    </div>
+  </div>
+</div>
